@@ -1,3 +1,6 @@
+[![Stories in
+Ready](https://badge.waffle.io/zipshare/zipshare-api.png?label=ready&title=Ready)](https://waffle.io/zipshare/zipshare-api)
+
 # Zipshare API
 The Zipshare API is a RESTful API for the [ZipShare hosting and sharing
 service](https://github.com/zipshare/zipshare). The API allows integrations of
@@ -17,7 +20,8 @@ $ make docs   # Generates API and code documentation
 
 ## Contributing
 Our [contribution guidelines](CONTRIBUTING.md) are summarized as:
-* Work on whatever you think fits within the vision of Zipshare
+* Work on whatever [is ready](https://waffle.io/zipshare/zipshare-api) or
+  anything you believe fits in the vision of ZipShare.
 * Create issues when you think of an enhancement or find a bug. Submit patches when
   you can.
 * CodeUnion owns all the software.

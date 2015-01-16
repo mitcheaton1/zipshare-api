@@ -20,9 +20,9 @@ Our [contribution guidelines](CONTRIBUTING.md) are summarized as:
 * Work on whatever you think fits within the vision of Zipshare
 * Create issues when you think of an enhancement or find a bug. Submit patches when
   you can.
-* CodeUnion owns all the software.
-* Be compassionate and kind to one another. Harassment or verbal abuse of any
-  kind is not tolerated.
+* [CodeUnion owns all the code and related assets](LICENSE).
+* [Be compassionate and kind to one another.](CONTRIBUTING.md#code-of-conduct)
+  Harassment or verbal abuse of any kind is not tolerated.
 
 ## Dependencies
 * Ruby 2.2

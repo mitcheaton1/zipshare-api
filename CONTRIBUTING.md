@@ -10,7 +10,7 @@ This document seeks to address each of these questions in plain language.
 
 ## What To Contribute
 Work on things that interest you and [fall in line with ZipShare's
-vision](https://github.com/zipshare/zipshare#vision)
+vision](https://github.com/zipshare/zipshare#vision).
 
 The kinds of work we're especially interested in are:
 

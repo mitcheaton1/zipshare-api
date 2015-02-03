@@ -1,6 +1,7 @@
 class UserInviter
   def invite(email)
-    user = User.create(email: email, access_token: User.generate_token)
-    user.access_token
+    token = SecureRandom.uuid
+    user = User.create(email: email, access_token: token)
+    token
   end
 end

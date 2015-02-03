@@ -11,9 +11,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'yard', '0.8.7.6', group: :doc
 # Use responders to declare content type at controller level
 gem 'responders', '~> 2.0'
-
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+# Use bcrypt for secure api tokens
+gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

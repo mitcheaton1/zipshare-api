@@ -9,6 +9,8 @@ gem 'pg'
 gem 'jbuilder', '~> 2.0'
 # Use yardoc for documentation
 gem 'yard', '0.8.7.6', group: :doc
+# Use responders to declare content type at controller level
+gem 'responders', '~> 2.0'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

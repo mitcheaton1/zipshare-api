@@ -25,6 +25,8 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
+  # Purge data from database on every test run.
+  gem 'database_cleaner'
   # Use rspec rails for tests
   gem 'rspec-rails', '~> 3.0'
 

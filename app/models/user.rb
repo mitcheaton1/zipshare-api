@@ -1,11 +1,11 @@
 class User < ActiveRecord::Base
-  before_save :encrypt_token
+  validates :email, email: true, uniqueness: { case_sensitive: false }
 
-  def encrypt_token
-    self.access_token = BCrypt::Password.create(access_token)
+  def access_token=(access_token)
+    self.access_token_digest = @access_token = BCrypt::Password.create(access_token)
   end
 
-  def is_token?(unencrypted_token)
-    BCrypt::Password.new(self.access_token) == unencrypted_token
+  def access_token
+    @access_token ||= BCrypt::Password.new(access_token_digest)
   end
 end

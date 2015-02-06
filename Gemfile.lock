@@ -50,6 +50,8 @@ GEM
     debug_inspector (0.0.2)
     debugger-linecache (1.2.0)
     diff-lcs (1.2.5)
+    email_validator (1.5.0)
+      activemodel
     erubis (2.7.0)
     globalid (0.3.0)
       activesupport (>= 4.1.0)
@@ -146,6 +148,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   byebug
   database_cleaner
+  email_validator (~> 1.5.0)
   jbuilder (~> 2.0)
   pg
   rails (= 4.2.0)

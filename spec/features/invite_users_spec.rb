@@ -5,24 +5,31 @@ describe "Inviting Users" do
     DatabaseCleaner.clean
   end
 
-  context "With a valid email address" do
-    it "creates the user" do
-      inviter = UserInviter.new()
-      result = inviter.invite("zee@example.com")
+  def find_user(email)
+    User.find_by(:email => email)
+  end
 
-      expect(User.find_by(email: "zee@example.com")).to be_present
+  let(:inviter) do
+    UserInviter.new()
+  end
+
+  let!(:result) { inviter.invite(email) }
+  let(:email) { "zee@example.com" }
+
+  context "a valid invitation" do
+    it "creates the user" do
+      expect(find_user(email)).to be_present
     end
 
     it "returns the decrypted access token" do
-      inviter = UserInviter.new()
-      result = inviter.invite("zee@example.com")
-
       expect(result).not_to be_empty
-      expect(User.find_by(email: "zee@example.com").access_token).not_to eql result
+    end
+
+    it "encrypts the access token on the user" do
+      expect(find_user(email).access_token_digest).not_to eql result
     end
 
     it "generates a random access token" do
-      inviter = UserInviter.new()
       person_a_access_token = inviter.invite("person-a@example.com")
       person_b_access_token = inviter.invite("person-b@example.com")
 
@@ -30,13 +37,11 @@ describe "Inviting Users" do
     end
   end
 
-  context "without a valid email address" do
-    it "doesn't create the user"
-    it "returns an error message"
-  end
-
-  context "when the email address is already taken" do
-    it "doesn't create the user"
-    it "doesn't return anything"
+  context "when invite is invalid" do
+    it "returns an array of reasons why the invite was invalid" do
+      errors = inviter.invite(email)
+      expect(errors.length).to eql(1)
+      expect(errors).to include "Email has already been taken"
+    end
   end
 end

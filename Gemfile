@@ -13,7 +13,8 @@ gem 'yard', '0.8.7.6', group: :doc
 gem 'responders', '~> 2.0'
 # Use bcrypt for secure api tokens
 gem 'bcrypt', '~> 3.1.7'
-
+# Use email_validator to validate email addresses.
+gem 'email_validator', '~> 1.5.0'
 # Use Unicorn as the app server
 # gem 'unicorn'
 

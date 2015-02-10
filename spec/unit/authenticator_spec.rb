@@ -2,24 +2,29 @@ require 'spec_helper'
 require 'authenticator'
 
 describe Authenticator do
-  let(:authenticator) { Authenticator.new(user_store) }
-
   describe("#authenticate(email, access_token)") do
+    def authenticate(finder, email, access_token)
+      Authenticator.new(finder).authenticate(email, access_token)
+    end
+
     it "Returns false if the user does not exist" do
-      result = Authenticator.new(->(attributes) { nil }).authenticate("non-existant-user@example.com", "not-existant-token")
-      expect(result).to eql(false)
+      expect(authenticate(finder(nil), "non-existant-user@example.com", "token")).to eql(false)
     end
 
     it "Returns false if the user exists but the access token is invalid" do
-      user = double("User", access_token: "token")
-      result = Authenticator.new(->(attributes) { user }).authenticate("existant-user@example.com", "not-existant-token")
-      expect(result).to eql(false)
+      expect(authenticate(finder(user), "existant-user@example.com", "invalid-token")).to eql(false)
     end
 
     it "Returns the user if the user exists and the access token matches" do
-      user = double("User", access_token: "token")
-      result = Authenticator.new(->(attributes) { user }).authenticate("existant-user@example.com", "token")
-      expect(result).to eql(user)
+      expect(authenticate(finder(user), "existant-user@example.com", "token")).to eql(user)
+    end
+
+    def finder(user)
+      ->(attributes) { user }
+    end
+
+    def user
+      @user ||= double("User", access_token: "token")
     end
   end
 end

@@ -11,10 +11,10 @@ gem 'jbuilder', '~> 2.0'
 gem 'yard', '0.8.7.6', group: :doc
 # Use responders to declare content type at controller level
 gem 'responders', '~> 2.0'
-
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
+# Use bcrypt for secure api tokens
+gem 'bcrypt', '~> 3.1.7'
+# Use email_validator to validate email addresses.
+gem 'email_validator', '~> 1.5.0'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
@@ -25,6 +25,8 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
+  # Purge data from database on every test run.
+  gem 'database_cleaner'
   # Use rspec rails for tests
   gem 'rspec-rails', '~> 3.0'
 

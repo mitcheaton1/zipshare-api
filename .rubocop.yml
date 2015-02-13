@@ -5,6 +5,9 @@ AllCops:
     - 'db/migrate/*'
     - 'db/schema.rb'
 
+Style/Documentation:
+  Enabled: false
+
 Style/LineEndConcatenation:
   Enabled: false
 

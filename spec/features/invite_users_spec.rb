@@ -40,6 +40,7 @@ describe "Inviting Users" do
   context "when invite is invalid" do
     it "returns an array of reasons why the invite was invalid" do
       errors = inviter.invite(email)
+
       expect(errors.length).to eql(1)
       expect(errors).to include "Email has already been taken"
     end

@@ -6,7 +6,7 @@ describe "Inviting Users" do
   end
 
   def find_user(email)
-    User.find_by(:email => email)
+    User.find_by(email: email)
   end
 
   let(:inviter) do

@@ -18,6 +18,9 @@ Style/HashSyntax:
 Style/IndentHash:
   EnforcedStyle: consistent
 
+Style/BlockComments:
+  Enabled: false
+
 Style/BracesAroundHashParameters:
    EnforcedStyle: no_braces
 
@@ -43,3 +46,6 @@ Metrics/LineLength:
 
 Metrics/AbcSize:
   Max: 25
+
+Lint/UselessAssignment:
+  Enabled: false

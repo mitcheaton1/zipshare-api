@@ -12,12 +12,8 @@ class ApplicationController < ActionController::Base
 
   # Checks if the authorization header matches a user and their access token
   def authorized?
-    if request.authorization
-      email, access_token = decoded_credentials
-      user = User.find_by(email: email)
-      return user && user.access_token == access_token
-    end
-    false
+    return false unless request.authorization
+    Authenticator.new(User.method(:find_by)).authenticate(*decoded_credentials)
   end
 
 

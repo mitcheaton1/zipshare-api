@@ -1,0 +1,42 @@
+AllCops:
+  Exclude:
+    - '*.gemspec'
+    - 'bin/*'
+    - 'db/migrate/*'
+    - 'db/schema.rb'
+
+Style/LineEndConcatenation:
+  Enabled: false
+
+Style/HashSyntax:
+  Enabled: true
+  EnforcedStyle: ruby19
+
+Style/IndentHash:
+  EnforcedStyle: consistent
+
+Style/BracesAroundHashParameters:
+   EnforcedStyle: no_braces
+
+Style/WordArray:
+  Enabled: false
+
+Style/StringLiterals:
+  Enabled: true
+  EnforcedStyle: double_quotes
+
+Style/StringLiteralsInInterpolation:
+  Enabled: true
+  EnforcedStyle: double_quotes
+
+Style/MethodCallParentheses:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 20
+
+Metrics/LineLength:
+  Max: 120
+
+Metrics/AbcSize:
+  Max: 25

@@ -6,7 +6,10 @@ AllCops:
     - 'db/schema.rb'
 
 Style/Documentation:
-  Enabled: false
+  Exclude:
+    - 'app/controllers/*'
+    - 'app/helpers/*'
+    - 'config/application.rb'
 
 Style/LineEndConcatenation:
   Enabled: false
@@ -48,4 +51,4 @@ Metrics/AbcSize:
   Max: 25
 
 Lint/UselessAssignment:
-  Enabled: false
+  Enabled: true

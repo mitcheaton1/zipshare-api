@@ -1,3 +1,4 @@
+# Generates user objects
 class User < ActiveRecord::Base
   validates :email, email: true, uniqueness: { case_sensitive: false }
 

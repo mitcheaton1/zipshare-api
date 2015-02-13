@@ -1,5 +1,5 @@
 class HealthChecksController < ApplicationController
-respond_to :json
+  respond_to :json
 
   def show
     Resource.first

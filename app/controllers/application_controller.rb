@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate
 
   private
+
   # Sets status code to 401 unless a valid authorization header is provided
   def authenticate
     render(json: {}, status: 401) unless authorized?
@@ -15,7 +16,6 @@ class ApplicationController < ActionController::Base
     return false unless request.authorization
     Authenticator.new(User.method(:find_by)).authenticate(*decoded_credentials)
   end
-
 
   # Breaks authorization header into email and access token
   # @return Array <String>

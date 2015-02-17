@@ -1,5 +1,5 @@
-require 'spec_helper'
-require 'authenticator'
+require "spec_helper"
+require "authenticator"
 
 describe Authenticator do
   describe("#authenticate(email, access_token)") do
@@ -20,7 +20,7 @@ describe Authenticator do
     end
 
     def finder(user)
-      ->(attributes) { user }
+      ->(_attributes) { user }
     end
 
     def user

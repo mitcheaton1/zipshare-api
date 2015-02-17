@@ -8,9 +8,7 @@
 #    => nil
 #    > authenticator.authenticate("not-found-user@example.com", "real-token")
 #    => nil
-
 class Authenticator
-
   # Initializes an authenticator with a User store to retrieve users from.
   #
   # @param user_finder [Lambda] Takes a hash of attributes to find a user with.
@@ -34,5 +32,6 @@ class Authenticator
   end
 
   private
+
   attr_reader :user_finder
 end

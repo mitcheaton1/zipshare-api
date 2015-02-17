@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe "Health check" do
   it "returns 200 when database is available" do

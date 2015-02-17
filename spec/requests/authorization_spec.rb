@@ -16,7 +16,17 @@ describe "unauthorized/authorized request" do
       expect(response).to be_ok
     end
 
-    it "updates the user's most recent activity date"
+    it "updates the user's most recent activity date" do
+      access_token = "foo"
+      User.create(email: "email@example.com", access_token: access_token, last_activity_at: 10.years.ago)
+
+      headers = { "HTTP_AUTHORIZATION" => Base64.encode64("email@example.com:#{access_token}") }
+
+      get("/", {}, headers)
+      user = User.find_by(email: "email@example.com")
+
+      expect(user.last_activity_at).to be > 5.seconds.ago
+    end
 
     it "resets the attempted login count"
   end

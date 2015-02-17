@@ -8,13 +8,22 @@ class ApplicationController < ActionController::Base
 
   # Sets status code to 401 unless a valid authorization header is provided
   def authenticate
-    render(json: { errors: "invalid credentials" }, status: 401) unless authorized?
+    if authorized?
+      current_user.update_attributes(last_activity_at: DateTime.now)
+    else
+      render(json: { errors: "invalid credentials" }, status: 401)
+    end
   end
 
   # Checks if the authorization header matches a user and their access token
   def authorized?
     return false unless request.authorization
-    Authenticator.new(User.method(:find_by)).authenticate(*decoded_credentials)
+    current_user
+  end
+
+  # Retrieves the current user
+  def current_user
+    @current_user ||= Authenticator.new(User.method(:find_by)).authenticate(*decoded_credentials)
   end
 
   # Breaks authorization header into email and access token

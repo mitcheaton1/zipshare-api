@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   # Sets status code to 401 unless a valid authorization header is provided
   def authenticate
-    render(json: {}, status: 401) unless authorized?
+    render(json: { errors: "invalid credentials" }, status: 401) unless authorized?
   end
 
   # Checks if the authorization header matches a user and their access token

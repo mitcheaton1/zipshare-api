@@ -28,7 +28,12 @@ describe "unauthorized/authorized request" do
       expect(response).to be_unauthorized
     end
 
-    it "responds with an error message in the body"
+    it "responds with an error message in the body" do
+      get("/")
+      response_json = JSON.parse(response.body)
+
+      expect(response_json["errors"]).to include "invalid credentials"
+    end
 
     it "increments the attempted login count"
   end

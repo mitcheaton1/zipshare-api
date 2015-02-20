@@ -2,7 +2,7 @@ require "base64"
 require "rails_helper"
 
 describe "unauthorized/authorized request" do
-  let(:user) { User.create(user_credentials.merge(last_activity_at: 10.years.ago)) }
+  let(:user) { User.create(user_credentials.merge(last_activity_at: 10.years.ago, login_attempts: 2)) }
   let(:user_credentials) { { email: "email@example.com", access_token: token } }
   let(:token) { "token" }
 
@@ -20,7 +20,9 @@ describe "unauthorized/authorized request" do
       expect(user.reload.last_activity_at).to be > 5.seconds.ago
     end
 
-    it "resets the attempted login count"
+    it "resets the attempted login count" do
+      expect(user.reload.login_attempts).to eq(0)
+    end
   end
 
   context "request with invalid credientials" do

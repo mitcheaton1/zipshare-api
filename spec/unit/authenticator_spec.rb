@@ -24,7 +24,7 @@ describe Authenticator do
     end
 
     def user
-      @user ||= double("User", access_token: "token")
+      @user ||= double("User", access_token: "token", login_attempts: 0, update_attributes: true)
     end
   end
 end

@@ -2,30 +2,22 @@ require "base64"
 require "rails_helper"
 
 describe "unauthorized/authorized request" do
+  let(:user) { User.create(user_credentials.merge(last_activity_at: 10.years.ago)) }
+  let(:user_credentials) { { email: "email@example.com", access_token: token } }
+  let(:token) { "token" }
+
   context "request with valid credentials" do
+    before do
+      user
+      get_as("/", user_credentials)
+    end
+
     it "returns status of 200" do
-      # Arrange: Create a user in the database so we can send a request
-      # With their login credentials
-      access_token = UserInviter.new.invite("email@example.com")
-
-      headers = { "HTTP_AUTHORIZATION" => Base64.encode64("email@example.com:#{access_token}") }
-      # Act: Send a request to an API path with the login credentials
-      get("/", {}, headers)
-
-      # Assert: Verify the request was/response is OK.
       expect(response).to be_ok
     end
 
     it "updates the user's most recent activity date" do
-      access_token = "foo"
-      User.create(email: "email@example.com", access_token: access_token, last_activity_at: 10.years.ago)
-
-      headers = { "HTTP_AUTHORIZATION" => Base64.encode64("email@example.com:#{access_token}") }
-
-      get("/", {}, headers)
-      user = User.find_by(email: "email@example.com")
-
-      expect(user.last_activity_at).to be > 5.seconds.ago
+      expect(user.reload.last_activity_at).to be > 5.seconds.ago
     end
 
     it "resets the attempted login count"
@@ -40,11 +32,26 @@ describe "unauthorized/authorized request" do
 
     it "responds with an error message in the body" do
       get("/")
-      response_json = JSON.parse(response.body)
 
       expect(response_json["errors"]).to include "invalid credentials"
     end
 
-    it "increments the attempted login count"
+    it "increments the attempted login count" do
+      (expect do
+        get_as("/", user_credentials.merge(access_token: "wrong"))
+      end).to change { user.reload.login_attempts }.by(1)
+    end
+  end
+
+  def get_as(path, user_credentials)
+    credentials_string = "#{ user_credentials[:email] }:#{ user_credentials[:access_token] }"
+    headers = {
+      "HTTP_AUTHORIZATION" => Base64.encode64(credentials_string) }
+    # Act: Send a request to an API path with the login credentials
+    get(path, {}, headers)
+  end
+
+  def response_json
+    @response_json ||= JSON.parse(response.body)
   end
 end

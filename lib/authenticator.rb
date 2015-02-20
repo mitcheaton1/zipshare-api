@@ -24,11 +24,13 @@ class Authenticator
   # @return [User, false]
   def authenticate(email, access_token)
     user = user_finder.call(email: email)
-    if user && user.access_token == access_token
-      user
-    else
-      false
+    return user if user && user.access_token == access_token
+
+    if user && user.access_token != access_token
+      user.update_attributes(login_attempts: user.login_attempts + 1)
     end
+
+    false
   end
 
   private

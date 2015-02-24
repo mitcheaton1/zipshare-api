@@ -44,16 +44,4 @@ describe "unauthorized/authorized request" do
       end).to change { user.reload.login_attempts }.by(1)
     end
   end
-
-  def get_as(path, user_credentials)
-    credentials_string = "#{ user_credentials[:email] }:#{ user_credentials[:access_token] }"
-    headers = {
-      "HTTP_AUTHORIZATION" => Base64.encode64(credentials_string) }
-    # Act: Send a request to an API path with the login credentials
-    get(path, {}, headers)
-  end
-
-  def response_json
-    @response_json ||= JSON.parse(response.body)
-  end
 end
